@@ -1,0 +1,17 @@
+<div class="bundle-product-container">
+  <h1 class="bundle-heading">Combo Bundle  Products</h1>
+  {% for field in product.metafields.custom.bundle_products.value %}
+    {% assign product_metafiled = all_products[field.handle] %}
+    <div class="bundle-product" id="{{ product_metafiled.variants.first.id }}">
+      <div class="bundle-product-image">
+        {%- assign featured_image = product_metafiled.selected_or_first_available_variant.featured_image | default: product_metafiled.featured_image -%}
+        <img src="{{ featured_image | img_url:'master'}}">
+      </div> 
+      <div class="bundle-product-content">
+        <h1>{{ product_metafiled.title }}</h1>
+        <h5>{{ product_metafiled.price | money }}</h5>
+      </div> 
+      <input  class="checkbox-addon" value="{{ product_metafiled.variants.first.id }}" type="checkbox" checkbox_check="{{ product_metafiled.variants.first.id }}">
+    </div>  
+  {% endfor %}  
+</div>
